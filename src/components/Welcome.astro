@@ -1,12 +1,11 @@
 ---
-
 // Get the list of questions from the filesystem
 let questions = [];
-const modules = import.meta.glob('../content/questions/*.md');
+const modules = import.meta.glob("../content/questions/*.md");
 for (const [path, resolver] of Object.entries(modules)) {
 	const markdown = await resolver();
 	const { frontmatter } = markdown;
-	const slug = (path.split('/').pop() ?? '').replace('.md', '');
+	const slug = (path.split("/").pop() ?? "").replace(".md", "");
 	console.log(`Loading question: ${slug}`);
 	questions.push({
 		slug,
@@ -15,46 +14,44 @@ for (const [path, resolver] of Object.entries(modules)) {
 }
 ---
 
+<!-- Ajout d’un padding top pour compenser la navbar fixed -->
+<main class="pt-20">
+	<!-- Hero section améliorée -->
+	<section class="hero min-h-[70vh] bg-base-100">
+		<div class="hero-content text-center flex-col">
+			<a
+				class="text-3xl md:text-6xl font-black tracking-tight text-primary drop-shadow-sm max-w-4xl leading-tight"
+			>
+				Des réponses claires
+			</a>
+			<p class="py-8 text-lg md:text-l max-w-2xl text-base-content/80">
+				Une ressource pour comprendre, partager et déconstruire les
+				idées reçues.
+			</p>
+			<a href="/q/" class="btn btn-primary btn-lg">
+				Explorer les questions
+			</a>
+		</div>
+	</section>
 
-		<!-- Ajout d’un padding top pour compenser la navbar fixed -->
-		<main class="pt-20">
-			<!-- Hero section améliorée -->
-			<section class="hero min-h-[70vh] bg-base-100">
-				<div class="hero-content text-center flex-col">
-					<a
-						class="text-3xl md:text-6xl font-black tracking-tight text-primary drop-shadow-sm max-w-4xl leading-tight"
-					>
-						Des réponses claires
+	<!-- Questions preview -->
+	<section id="questions" class="p-8 max-w-4xl mx-auto">
+		<a
+			class="text-2xl md:text-4xl font-extrabold mb-8 text-primary border-b-4 border-primary inline-block pb-2"
+		>
+			Quelques questions fréquentes
+		</a>
+		<!-- Quelques questions aléatoires -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				questions.slice(0, 6).map((q) => (
+					<a href={`/q/${q.slug}`} class="no-underline">
+						<div class="card bg-base-200 hover:bg-base-300 transition p-6 h-full cursor-pointer shadow-xl">
+							<h2 class="text-xl font-bold mb-2">{q.title}</h2>
+						</div>
 					</a>
-					<p
-						class="py-8 text-lg md:text-l max-w-2xl text-base-content/80"
-					>
-						Une ressource pour comprendre, partager et déconstruire
-						les idées reçues.
-					</p>
-					<a href="/q/" class="btn btn-primary btn-lg">
-						Explorer les questions
-					</a>
-				</div>
-			</section>
-
-			<!-- Questions preview -->
-			<section id="questions" class="p-8 max-w-4xl mx-auto">
-				<a
-					class="text-2xl md:text-4xl font-extrabold mb-8 text-primary border-b-4 border-primary inline-block pb-2"
-				>
-					Quelques questions fréquentes
-				</a>
-				<!-- Quelques questions aléatoires -->
-				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{questions.slice(0, 6).map(q => (
-						<a href={`/q/${q.slug}`} class="no-underline">
-							<div
-								class="card bg-base-200 hover:bg-base-300 transition p-6 h-full cursor-pointer shadow-xl"
-							>
-								<h2 class="text-xl font-bold mb-2">{q.title}</h2>
-							</div>
-						</a>
-					))}
-			</section>
-		</main>
+				))
+			}
+		</div>
+	</section>
+</main>

@@ -2,10 +2,11 @@
 import "../assets/app.css";
 
 export interface LayoutProps {
-  title: string;
+	title: string;
 }
 const { title } = Astro.props;
 ---
+
 <!doctype html>
 <html lang="en" data-theme="bumblebee">
 	<head>
@@ -32,9 +33,7 @@ const { title } = Astro.props;
 					Pourquoi c'est problématique ?
 				</a>
 				<nav>
-					<a class="btn btn-sm btn-primary" href="/q/">
-						Questions
-					</a>
+					<a class="btn btn-sm btn-primary" href="/q/"> Questions </a>
 				</nav>
 			</div>
 		</header>

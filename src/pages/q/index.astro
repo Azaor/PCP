@@ -1,38 +1,41 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-const modules = import.meta.glob('../../content/questions/*.md');
+const modules = import.meta.glob("../../content/questions/*.md");
 const questions = [];
 
 for (const [path, resolver] of Object.entries(modules)) {
-  const markdown = await resolver() as { frontmatter: { title: string; shortAnswer: string } };
-  const { frontmatter } = markdown;
+    const markdown = (await resolver()) as {
+        frontmatter: { title: string; shortAnswer: string };
+    };
+    const { frontmatter } = markdown;
 
-  const slug = (path
-    .split('/')
-    .pop() ?? '')
-    .replace('.md', '');
+    const slug = (path.split("/").pop() ?? "").replace(".md", "");
 
-  questions.push({
-    slug,
-    title: frontmatter.title,
-    shortAnswer: frontmatter.shortAnswer,
-  });
+    questions.push({
+        slug,
+        title: frontmatter.title,
+        shortAnswer: frontmatter.shortAnswer,
+    });
 }
 ---
 
 <Layout title="Toutes les questions">
     <main class="pt-24 pb-12 max-w-6xl mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-extrabold mb-12 text-primary">Toutes les questions</h1>
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-12 text-primary">
+            Toutes les questions
+        </h1>
 
-      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {questions.map(q => (
-          <a href={`/q/${q.slug}`} class="no-underline">
-            <div class="card bg-base-200 hover:bg-base-300 transition p-6 h-full cursor-pointer shadow-xl">
-              <h2 class="text-xl font-bold mb-2">{q.title}</h2>
-            </div>
-          </a>
-        ))}
-      </div>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {
+                questions.map((q) => (
+                    <a href={`/q/${q.slug}`} class="no-underline">
+                        <div class="card bg-base-200 hover:bg-base-300 transition p-6 h-full cursor-pointer shadow-xl">
+                            <h2 class="text-xl font-bold mb-2">{q.title}</h2>
+                        </div>
+                    </a>
+                ))
+            }
+        </div>
     </main>
 </Layout>

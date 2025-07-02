@@ -4,7 +4,9 @@ let questions = [];
 const modules = import.meta.glob("../content/questions/*.md");
 for (const [path, resolver] of Object.entries(modules)) {
 	const markdown = await resolver();
-	const { frontmatter } = markdown;
+	const { frontmatter } = markdown as {
+		frontmatter: { title: string };
+	};
 	const slug = (path.split("/").pop() ?? "").replace(".md", "");
 	console.log(`Loading question: ${slug}`);
 	questions.push({

@@ -1,48 +1,83 @@
-# Astro Starter Kit: Basics
+# Pourquoi c'est problématique ? – Site Collaboratif
 
-```sh
-npm create astro@latest -- --template basics
-```
+Bienvenue sur le site Pourquoi c'est problématique ? Ce site a pour but de référencer les idées problématique et d’y répondre de façon claire, sourcée et pédagogique.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Contribuer au site
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+Ce projet est **ouvert à toutes et tous** ! Tu peux participer simplement en ajoutant une nouvelle question ou en améliorant les réponses existantes.
 
-## 🚀 Project Structure
+### Comment contribuer ?
 
-Inside of your Astro project, you'll see the following folders and files:
+1. **Fork** ce dépôt depuis GitHub.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+2. **Ajoute ta question** dans un nouveau fichier Markdown (`.md`) dans le dossier [`src/content/questions/`](./src/content/questions).
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+   - Respecte la structure frontmatter (exemple ci-dessous) :
 
-## 🧞 Commands
+   ```md
+   ---
+   title: "Titre clair de ta question"
+   shortAnswer: "Une réponse courte qui résume la réponse."
+   sources:
+     - label: "Nom de la source"
+       url: "https://lien-vers-la-source"
+   nextQuestion:
+     label: "Titre d’une question liée"
+     url: "/q/slug-question-liée"
+   ---
 
-All commands are run from the root of the project, from a terminal:
+   Ici, tu peux écrire ta réponse détaillée en Markdown, avec des titres, listes, liens, etc.
+3. **Enregistre ton fichier** avec un nom clair en minuscule, sans espaces, par exemple racisme-inverse.md.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+4. **Teste ta question** pour vérifier qu’elle s’affiche bien :
 
-## 👀 Want to learn more?
+    - **Option simple (sans installation) :**
+    Tu peux utiliser un visualiseur Markdown en ligne, comme Dillinger ou StackEdit, pour vérifier que ton fichier s’affiche correctement (titres, liens, listes, etc.).
+    Attention : cette méthode ne montre pas la mise en forme exacte du site, mais permet de s’assurer que le Markdown est bien formé.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+    - **Option avancée (recommandée)** :
+    Si tu te sens à l’aise avec un peu de technique, tu peux tester ta question directement dans le site :
+
+        1. Clone le dépôt en local sur ton ordinateur.
+
+        2. Installe Node.js si ce n’est pas déjà fait (https://nodejs.org).
+
+        3. Ouvre un terminal, navigue dans le dossier du projet et lance :
+            ``` sh
+            npm install
+            npm run dev
+            ```
+
+        4. Ouvre ton navigateur à l’adresse indiquée (souvent http://localhost:4321).
+
+        5. Vérifie que ta question apparaît bien dans la liste ou à l’URL correspondante (/q/nom-de-ta-question).
+
+        6. Si tu rencontres un souci, vérifie la syntaxe Markdown et la structure frontmatter.
+
+5. **Crée une Pull Request** vers la branche principale (main ou master) de ce dépôt.
+
+## 📚 Règles de bonne conduite
+
+- **Sois factuel·ve et précis·e** : base tes réponses sur des sources fiables et reconnues.
+
+- **Évite les propos offensants ou polémiques** : ce site vise à informer et apaiser les débats.
+
+- **Reste concis·e et clair·e,** les réponses doivent être accessibles à tous·tes.
+
+- **Merci d’indiquer au moins une source vérifiable** dans le frontmatter.
+
+## 🛠️ Pour les développeur·se·s
+
+Le site est construit avec Astro et utilise les fichiers Markdown pour générer les pages automatiquement.
+
+- Les questions sont dans src/content/questions/*.md.
+
+- Les pages sont générées dynamiquement à partir des fichiers Markdown.
+
+- Le style utilise Tailwind CSS avec DaisyUI pour l’interface.
+
+## 🙏 Merci pour ta contribution !
+
+Chaque nouvelle question enrichit le site et aide à mieux comprendre et combattre le racisme au quotidien.

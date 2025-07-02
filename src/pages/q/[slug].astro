@@ -1,0 +1,59 @@
+---
+import fs from 'fs';
+import matter from 'gray-matter';
+import QuestionPage from '../../components/QuestionLayout.astro';
+import Layout from '../../layouts/Layout.astro';
+import path from 'path';
+
+const { slug } = Astro.params;
+
+// Charger tous les .md du dossier en une seule fois
+const modules = import.meta.glob('../../content/questions/*.md');
+
+let questionData = null;
+
+for (const [path, resolver] of Object.entries(modules)) {
+  const fileSlug = path
+    .split('/')
+    .pop()?.replace('.md', '') || '';
+  if (fileSlug === slug) {
+    const markdown = await resolver();
+    const { frontmatter, Content } = markdown as any;
+    questionData = {
+      title: frontmatter.title,
+      shortAnswer: frontmatter.shortAnswer,
+      longAnswer: Content,
+      sources: frontmatter.sources || [],
+      nextQuestion: frontmatter.nextQuestion || null
+    };
+    break;
+  }
+}
+
+if (!questionData) {
+  throw new Error(`Question "${slug}" introuvable !`);
+}
+
+export function getStaticPaths() {
+    // Lire tous les fichiers dans le dossier des questions
+    const files = fs.readdirSync('src/content/questions');
+    
+    // Extraire les slugs des fichiers .md
+    return files
+        .filter(file => file.endsWith('.md'))
+        .map(file => {
+        const slug = file.replace('.md', '');
+        return { params: { slug } };
+        });
+}
+---
+<Layout title={questionData.title}>
+<QuestionPage
+  title={questionData.title}
+  shortAnswer={questionData.shortAnswer}
+  sources={questionData.sources}
+  nextQuestion={questionData.nextQuestion}
+>
+    <questionData.longAnswer />
+</QuestionPage>
+</Layout>

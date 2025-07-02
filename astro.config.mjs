@@ -6,5 +6,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   output: 'static',
-  base: '/PCP/', 
+  base: '/PCP',
 });
